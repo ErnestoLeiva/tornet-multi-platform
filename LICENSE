@@ -2,6 +2,19 @@ MIT License
 
 Copyright (c) 2025 Ernesto Leiva
 
+This is a modified and extended fork of:
+- "TorNet" by Ayad Seghiri (https://github.com/ayadseghairi/tornet)
+- Originally authored by Mr Fidal
+
+Modifications include:
+- Full Windows and macOS compatibility
+- SOCKS5 proxy validation and resilience
+- Logging, docstring unification, cleanup handling, etc.
+
+----------------------------------------------
+Below is the original MIT license as required:
+----------------------------------------------
+
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
 in the Software without restriction, including without limitation the rights
