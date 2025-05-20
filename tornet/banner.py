@@ -14,7 +14,7 @@ def print_banner():
 {white} |{green}    ██║   ██║   ██║██╔══██╗██║╚██╗██║██╔══╝     ██║   {white} |
 {white} |{green}    ██║   ╚██████╔╝██║  ██║██║ ╚████║███████╗   ██║   {white} |
 {white} |{green}    ╚═╝    ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═══╝╚══════╝   ╚═╝   {white} |
-{white} +---------------------{cyan}({red}ByteBreach{cyan}){white}----------------------+{reset}
-{white} +--------------{cyan}({red}Improved by Ayad Seghiri{cyan}){white}--------------------+{reset}
+{white} +-------------------------------------------------------+{reset}
+
 """
     print(banner)
