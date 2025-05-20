@@ -1,156 +1,138 @@
-# TorNet
+<img src = "https://i.imgur.com/Mo2HtCS.png" alt="Tor logo">**NET-MP**
 
-TorNet is a Python package that automates IP address changes using Tor. It is a top tool for securing your networks by frequently changing your IP address, making it difficult for trackers to pinpoint your location.
-
-## Benefits
-
-- **Enhanced Privacy**: By regularly changing your IP address, TorNet makes it much harder for websites and trackers to monitor your online activity.
-- **Increased Security**: Frequent IP changes can help protect you from targeted attacks and make it more difficult for malicious actors to track your online presence.
-- **Anonymity**: Using Tor, TorNet helps you maintain a high level of anonymity while browsing the internet.
-- **Ease of Use**: TorNet is designed to be simple and easy to use, whether you prefer command-line tools or integrating it directly into your Python scripts.
-- **Protection from Tracking**: With your IP address changing frequently, tracking services and advertisers will find it more challenging to build a profile on you.
-- **Peace of Mind**: Knowing that your IP address is regularly changed can give you confidence in your online privacy and security.
-
-## Check IP
-```bash
-curl --socks5 127.0.0.1:9050 https://check.torproject.org/api/ip
-```
-## Check DNS Leak
-https://dnsleaktest.com/
-
-## Installation
-
-To install TorNet, use pip:
-
-```bash
-pip install python-tornet==2.2.0
-```
-
-To install TorNet, use yay (Arch Linux):
-
-```bash
-yay -S python-tornet
-```
-
-## Usage
-
-TorNet provides a command-line interface for easy use. Here are the available options:
-
-```bash
-tornet --interval <seconds> --count <number>
-```
-
-- `--interval` (optional): Time in seconds between IP changes (default is 60 seconds).
-- `--count` (optional): Number of times to change the IP (default is 10 times). If set to 0, the IP will be changed indefinitely.
-- `--stop` (optional): Stop all Tor services and TorNet processes and exit.
-- `--ip` (optional): Display the current IP address and exit.
-- `--auto-fix` (optional): Automatically fix issues (install/upgrade packages).
-- `--help`: Show the help message and exit.
-- `--version`: Show the version number and exit.
-
-## How It Works
-
-TorNet uses the Tor network to route your internet traffic through multiple nodes, effectively masking your IP address. By periodically changing the IP address, TorNet ensures that your online activity remains anonymous and secure. This can be particularly useful for:
-
-- **Privacy enthusiasts** who want to minimize their digital footprint.
-- **Security professionals** who need to conduct penetration testing or other security assessments without revealing their true IP address.
-- **Journalists and activists** operating in regions with internet censorship or surveillance.
-
-### Examples
-
-Change the IP address every 30 seconds, for a total of 5 times:
-
-```bash
-tornet --interval 30 --count 5
-```
-
-Change the IP address every 60 seconds indefinitely:
-
-```bash
-tornet --interval 60 --count 0
-```
-
-Stop all Tor services and TorNet processes:
-
-```bash
-tornet --stop
-```
-
-Display the current IP address:
-
-```bash
-tornet --ip
-```
-
-Automatically fix issues (install/upgrade packages):
-
-```bash
-tornet --auto-fix
-```
-
-## Configuring Your Browser to Use TorNet
-
-To ensure your browser uses the Tor network for anonymity, you need to configure it to use TorNet's proxy settings:
-
-1. **Firefox**:
-    - Go to `Preferences` > `General` > `Network Settings`.
-    - Select `Manual proxy configuration`.
-    - Enter `127.0.0.1` for `SOCKS Host` and `9050` for the `Port` (or your specified values if different).
-    - Ensure the checkbox `Proxy DNS when using SOCKS v5` is checked.
-    - Click `OK`.
-<img src="https://ayadseghairi.github.io/assets/img/port.png" alt="Firefox Configuration Example" />
-
-
-## In Your Python Code
-
-You can also use TorNet within your Python scripts if needed.
-
-```python
-from tornet import ma_ip, change_ip, initialize_environment, change_ip_repeatedly
-
-# Initialize the environment (install dependencies and start Tor)
-initialize_environment()
-
-# Get the current IP
-current_ip = ma_ip()
-print("Current IP:", current_ip)
-
-# Change the IP once
-new_ip = change_ip()
-print("New IP:", new_ip)
-
-# Change the IP repeatedly
-change_ip_repeatedly(60, 10)
-```
-
-## Troubleshooting
-
-If you encounter any issues while using TorNet, here are a few steps you can take:
-
-- Ensure that Tor is installed and running on your system.
-- Make sure your internet connection is stable.
-- Use the `--auto-fix` option to automatically install or upgrade required packages.
-- Check the Tor logs for any error messages that might indicate connectivity problems.
-
-## Contributing
-
-We welcome contributions from the community! If you have an idea for a new feature or have found a bug, please open an issue on our [GitHub repository](https://github.com/ayadseghairi/tornet).
-
-## License
-
-TorNet is released under the MIT License. See the LICENSE file for more details.
-
-## Acknowledgements
-
-We would like to thank the developers of the Tor project for their work in creating a robust and secure anonymity network.
-
-## Thanks
-
-Thank you for using TorNet! We hope this tool helps you secure your network and maintain your privacy. If you have any feedback or suggestions, please feel free to reach out to us.
-
-Many thanks also to the original developer [ByteBreach](https://github.com/ByteBreach/tornet) 
-This project is an improvement to his own project
+[![PyPI version](https://img.shields.io/pypi/v/tornet-mp)](https://pypi.org/project/tornet-mp)
+[![Python](https://img.shields.io/pypi/pyversions/tornet-mp)](https://pypi.org/project/tornet-mp)
 
 ---
 
-By following this guide, you should be able to effectively use TorNet to enhance your online privacy and security. Happy browsing!
+Automate public-IP rotation through the Tor network on **Windows, macOS and Linux**.
+
+* 🛡️  Hide your real IP behind Tor exit nodes  
+* 🔄  Rotate on a timer or on demand  
+* ⚙️  Self-installs missing prerequisites (`pip`, `requests[socks]`, `Tor`)  
+* 📜  Clear, color-coded logs (all levels shown by default)  
+* 🐍  Tiny Python API for scripting
+
+---
+
+## Installation
+
+```bash
+pip install tornet-mp
+```
+
+Tor binary required - if `tor` is not on your `PATH`, run
+`tornet-mp --auto-fix` and the tool will install it where possible.
+
+## Development / editable install
+
+```bash
+git clone https://github.com/ErnestoLeiva/tornet-mp.git
+cd tornet-mp
+
+# optional but recommended: create and activate a virtual-env
+python -m venv .venv           # use  py -m venv .venv  on Windows
+# macOS/Linux:  source .venv/bin/activate
+# Windows CMD:  .venv\Scripts\activate.bat
+# Win PowerShell: .venv\Scripts\Activate.ps1
+
+# install in editable (“-e”) mode
+python -m pip install -e .
+```
+
+## Quick start
+
+```bash
+# show current (Tor/non-Tor) exit IP and exit
+tornet-mp --ip
+
+# rotate every 60 seconds, 10 times (default)
+tornet-mp
+
+# rotate every 90 seconds, 5 times
+tornet-mp --interval 90 --count 5
+
+# rotate on a random interval between 60-120 seconds, forever
+tornet-mp --interval "60-120" --count 0
+```
+
+## CLI options
+
+| Flag                 | Description                                      | Default |
+| -------------------- | ------------------------------------------------ | ------- |
+| `--interval SECONDS` | Delay (or range e.g. `60-120`) between rotations | `60`    |
+| `--count N`          | Rotation cycles; `0` = infinite                  | `10`    |
+| `--ip`               | Show current exit IP and quit                    | —       |
+| `--auto-fix`         | Re-install/upgrade dependencies and Tor          | —       |
+| `--stop`             | Stop Tor services and TorNet-MP processes        | —       |
+| `-V / --version`     | Print version                                    | —       |
+
+### Environment variables:
+
+| Variable         | Purpose                     | Default     |
+| ---------------- | --------------------------- | ----------- |
+| `TOR_SOCKS_HOST` | Hostname of Tor SOCKS proxy | `127.0.0.1` |
+| `TOR_SOCKS_PORT` | Port of Tor SOCKS proxy     | `9050`      |
+
+## Configuring Your Browser to Use TorNet
+
+### To ensure your browser uses the Tor network for anonymity, you need to configure it to use TorNet's proxy settings:
+
+#### ⚠️ Chrome and Chromium-based browsers do not support SOCKS proxies natively without command-line flags or extensions. Use `FoxyProxy` or similar tools for full control.
+
+### **Firefox**
+
+* Go to `Preferences` > `General` > `Network Settings`.
+* Select `Manual proxy configuration`.
+* Enter `127.0.0.1` for `SOCKS Host` and `9050` for the `Port` (or your specified values if different).
+* Ensure the checkbox `Proxy DNS when using SOCKS v5` is checked.
+* Click `OK`.
+
+<img src="https://i.imgur.com/jDLV6BZ.png" alt="Firefox Configuration Example">
+
+## Python use
+
+```python
+from tornet_mp.tornet_mp import initialize_environment, ma_ip, change_ip
+
+initialize_environment()
+print("Current IP:", ma_ip())
+print("Switching…")
+print("New Tor IP:", change_ip())
+```
+
+If Tor is already installed and running you can skip `initialize_environment()` and call `ma_ip()` / `change_ip()` directly.
+
+## How it works
+
+1. Ensures Tor, requests[socks] and PySocks are present
+
+2. Starts the Tor background service (systemd, Brew, or raw binary)
+
+3. Retrieves current exit IP via [https://check.torproject.org/api/ip](https://check.torproject.org/api/ip)
+
+4. Sends SIGHUP / service reload to request a new circuit on schedule
+
+5. Logs every step with colored categories (INFO, WARN, ERROR, etc.)
+
+## Contributing
+
+Bug reports and PRs are welcome!
+Style is enforced with [pre-commit](https://pre-commit.com).  
+After cloning, run:
+
+```bash
+pip install pre-commit
+pre-commit install
+```
+
+## Lineage & Credits
+
+This project began life as [tornet](https://github.com/ByteBreach/tornet) by Mr Fidal.  
+It was later reimagined and extended independently by [Ayad Seghairi](https://github.com/ayadseghairi/tornet).
+
+**TorNet‑MP** builds on both prior versions, refactoring the codebase, adding cross‑platform support (Windows, macOS, Linux), modern packaging, richer logging, automatic dependency management, and a polished CLI/UI.
+
+## License
+
+MIT © 2025 Ernesto Leiva

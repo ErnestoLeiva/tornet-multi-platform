@@ -23,43 +23,29 @@ var/
 .installed.cfg
 *.egg
 
-# Installer logs
-pip-log.txt
-pip-delete-this-directory.txt
-
-# Unit test / coverage reports
-htmlcov/
-.tox/
-.nox/
-.coverage
-.coverage.*
-.cache
-nosetests.xml
-coverage.xml
-*.cover
-.hypothesis/
-.pytest_cache/
-
-# PyBuilder
-target/
-
-# Jupyter Notebook checkpoints
-.ipynb_checkpoints
-
-# pyenv
-.python-version
-
-# Environments
+# Virtual environments
+.venv/
 env/
 venv/
 ENV/
 env.bak/
 venv.bak/
 
-# Virtualenvwrapper
-.venv/
-.local/
-.idea/
+# Test & coverage
+.coverage
+.tox/
+.nox/
+.pytest_cache/
+htmlcov/
 
-# VS Code
-.vscode
+# PyInstaller
+*.manifest
+*.spec
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# tooling
+/.ruff_cache/

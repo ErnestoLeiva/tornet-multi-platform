@@ -1,0 +1,38 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tornet-mp"
+dynamic = ["version"] 
+description = "TorNet - Cross-platform IP rotation using Tor with logging and automation"
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.8"
+authors = [
+    {name = "Ernesto Leiva", email = "contact@ernestoleiva.com"}
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Intended Audience :: Developers",
+    "Environment :: Console",
+    "Typing :: Typed",
+    "Topic :: Internet :: Proxy Servers",
+    "Topic :: Utilities"
+]
+dependencies = [
+    "requests>=2.28",
+    "pysocks>=1.7"
+]
+
+[project.scripts]
+tornet-mp = "tornet_mp:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+packages = ["tornet_mp"]
+
+[tool.setuptools.dynamic]
+version = { attr = "tornet_mp.version.__version__" }

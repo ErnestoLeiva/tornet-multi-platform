@@ -10,7 +10,7 @@ def is_arch_linux():
 def is_windows():
     return platform.system().lower() == 'windows'
 def is_macos():
-    return platform.system().lower() == 'darwin' and brew_exists()
+    return platform.system().lower() == 'darwin'
 def brew_exists():
     """Checks whether Homebrew is installed on macOS."""
     try:
@@ -44,7 +44,7 @@ def install_pip():
             log_minor("pip is already installed.")
         except subprocess.CalledProcessError:
             log_minor("pip not found, installing...")
-            os.system("brew install python3")
+            subprocess.run(["brew", "install", "python3"], stdout=subprocess.DEVNULL, check=True)
             log_minor("pip installed successfully.")
     else:
         try:
@@ -67,9 +67,9 @@ def install_requests():
         log_minor("requests not found, installing...")
         pip_cmd = "pip install requests requests[socks]"
         if is_windows():
-            os.system("py -m " + pip_cmd)
+            subprocess.run(["py", "-m", *pip_cmd.split()], stdout=subprocess.DEVNULL, check=True)
         else:
-            os.system(pip_cmd)
+            subprocess.run(pip_cmd.split(), stdout=subprocess.DEVNULL, check=True)
         log_minor("requests installed successfully.")
 
 def install_tor():
@@ -77,9 +77,9 @@ def install_tor():
     #### Installs the Tor binary using the appropriate method for the current OS.\n
     ***
     On:
-    - **Linux**: Uses `apt` or `pacman`
-    - **macOS**: Uses Homebrew
-    - **Windows**: Uses Chocolatey (installs it if needed)
+    - **Linux**: Uses `pacman`
+    - **macOS**: Uses `Homebrew`
+    - **Windows**: Uses `Chocolatey` (installs it if needed)
     """
     if is_arch_linux():
         try:
@@ -109,8 +109,11 @@ def install_tor():
             log_minor("tor is already installed.")
         except subprocess.CalledProcessError:
             log_minor("tor not found, installing...")
-            os.system("brew install tor")
-            log_minor("tor installed successfully.")
+            if not brew_exists():
+                log_error("Brew not installed, install it from https://brew.sh/ then retry")
+            else:
+                subprocess.run(["brew", "install", "tor"], stdout=subprocess.DEVNULL, check=True)
+                log_minor("tor installed successfully.")
     else:
         try:
             subprocess.check_output('which tor', shell=True)
@@ -123,7 +126,7 @@ def install_tor():
 
 def ensure_chocolatey_installed():
     """
-    #### Ensures that Chocolatey is installed on Windows.
+    #### Ensures that `Chocolatey` is installed on Windows.
     ##### If not found, attempts to install it via PowerShell.
     ***
     Returns:
