@@ -23,6 +23,8 @@ from .log import (
 # Globals
 TOOL_NAME = "tornet"
 VERSION = "2.1.0"
+_has_cleaned_up = False
+
 
 
 
@@ -332,15 +334,17 @@ def auto_fix():
 def stop_services():
     """
     #### Stops the Tor service and any active tornet processes\n
-    In Docker, uses `pidof`; otherwise uses platform-specific service commands.
+    Ensures this runs only once per session.
     """
-    # In Docker environment, find and kill the Tor process directly
+    global _has_cleaned_up
+    if _has_cleaned_up:
+        return
+    _has_cleaned_up = True
+
     if os.environ.get('DOCKER_ENV'):
         try:
-            # Find the Tor process ID
             tor_pid = subprocess.check_output("pidof tor", shell=True).decode().strip()
             if tor_pid:
-                # Kill the Tor process
                 os.system(f"kill {tor_pid}")
                 log_success("Tor process stopped.")
         except subprocess.CalledProcessError:
