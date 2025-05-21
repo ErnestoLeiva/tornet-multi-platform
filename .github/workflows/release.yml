@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - "src/tornet_mp/version.py"
+  workflow_dispatch:
 
 jobs:
   release:
