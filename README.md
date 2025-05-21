@@ -67,7 +67,7 @@ tornet-mp --interval "60-120" --count 0
 | `--stop`             | Stop Tor services and TorNet-MP processes        | —       |
 | `-V / --version`     | Print version                                    | —       |
 
-### Environment variables:
+### Environment variables
 
 | Variable         | Purpose                     | Default     |
 | ---------------- | --------------------------- | ----------- |
@@ -76,9 +76,9 @@ tornet-mp --interval "60-120" --count 0
 
 ## Configuring Your Browser to Use TorNet
 
-### To ensure your browser uses the Tor network for anonymity, you need to configure it to use TorNet's proxy settings:
+### To ensure your browser uses the Tor network for anonymity, you need to configure it to use TorNet's proxy settings
 
-#### ⚠️ Chrome and Chromium-based browsers do not support SOCKS proxies natively without command-line flags or extensions. Use `FoxyProxy` or similar tools for full control.
+#### ⚠️ Chrome and Chromium-based browsers do not support SOCKS proxies natively without command-line flags or extensions. Use `FoxyProxy` or similar tools for full control
 
 ### **Firefox**
 
@@ -93,7 +93,7 @@ tornet-mp --interval "60-120" --count 0
 ## Python use
 
 ```python
-from tornet_mp.tornet_mp import initialize_environment, ma_ip, change_ip
+from tornet_mp import initialize_environment, ma_ip, change_ip
 
 initialize_environment()
 print("Current IP:", ma_ip())
