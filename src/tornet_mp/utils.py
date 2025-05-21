@@ -5,13 +5,13 @@ from .log import log_minor, log_error
 
 
 # Platform determination
-def is_arch_linux():
+def is_arch_linux() -> bool:
     return os.path.exists("/etc/arch-release") or os.path.exists("/etc/manjaro-release")
-def is_windows():
+def is_windows() -> bool:
     return platform.system().lower() == 'windows'
-def is_macos():
+def is_macos() -> bool:
     return platform.system().lower() == 'darwin'
-def brew_exists():
+def brew_exists() -> bool:
     """Checks whether Homebrew is installed on macOS."""
     try:
         subprocess.check_output('which brew', shell=True)
@@ -20,7 +20,7 @@ def brew_exists():
         return False
 
 # Installation functions
-def install_pip():
+def install_pip() -> None:
     """
     #### Installs pip (Python package manager) based on the current OS.\n
     """
@@ -56,7 +56,7 @@ def install_pip():
             subprocess.check_output('sudo apt install python3-pip -y', shell=True)
             log_minor("pip installed successfully.")
 
-def install_requests():
+def install_requests() -> None:
     """
     #### Installs the `requests` and `requests[socks]` Python packages if not already installed.\n
     """
@@ -72,7 +72,7 @@ def install_requests():
             subprocess.run(pip_cmd.split(), stdout=subprocess.DEVNULL, check=True)
         log_minor("requests installed successfully.")
 
-def install_tor():
+def install_tor() -> None:
     """
     #### Installs the Tor binary using the appropriate method for the current OS.\n
     ***
@@ -124,7 +124,7 @@ def install_tor():
             subprocess.check_output('sudo apt install tor -y', shell=True)
             log_minor("tor installed successfully.")
 
-def ensure_chocolatey_installed():
+def ensure_chocolatey_installed() -> None:
     """
     #### Ensures that `Chocolatey` is installed on Windows.
     ##### If not found, attempts to install it via PowerShell.

@@ -11,13 +11,25 @@ import argparse
 import requests
 import subprocess
 import signal
-import platform
 import random
-from tornet_mp.utils import install_pip, install_requests, install_tor
+from tornet_mp.utils import (
+    install_pip, 
+    install_requests, 
+    install_tor, 
+    is_arch_linux, 
+    is_macos, 
+    is_windows
+)
 from .banner import print_banner
 from .log import (
-    configure as _log_configure, log_success, log_info, log_notice, log_minor,
-    log_warn, log_error, log_change
+    configure as _log_configure, 
+    log_success, 
+    log_info, 
+    log_notice, 
+    log_minor,
+    log_warn, 
+    log_error, 
+    log_change
 )
 from .version import __version__
 
@@ -33,17 +45,8 @@ TOOL_NAME = "tornet-mp"
 VERSION = __version__
 _has_cleaned_up = False
 
-
-# OS determination
-def is_arch_linux():
-    return os.path.exists("/etc/arch-release") or os.path.exists("/etc/manjaro-release")
-def is_macos():
-    return platform.system().lower() == 'darwin'
-def is_windows():
-    return platform.system().lower() == 'windows'
-
 # TOR service control
-def is_tor_installed():
+def is_tor_installed() -> bool:
     """
     #### Determines if Tor is installed based on the current operating system\n
     Uses platform-specific detection:
@@ -65,7 +68,7 @@ def is_tor_installed():
         return True
     except subprocess.CalledProcessError:
         return False
-def start_tor_service():
+def start_tor_service() -> None:
     """
     #### Starts the Tor service using the appropriate system command\n
     - **Linux**: Uses `systemctl` or `service`\n
@@ -88,7 +91,7 @@ def start_tor_service():
         subprocess.run(["brew", "services", "start", "tor"], stdout=subprocess.DEVNULL, check=True)
     else:
         subprocess.run(["sudo", "service", "tor", "start"], stdout=subprocess.DEVNULL, check=True)
-def reload_tor_service():
+def reload_tor_service() -> None:
     """
     #### Reloads the Tor service using platform-specific methods\n
     - On **Docker**, uses `pidof` and sends `SIGHUP` directly to the Tor process\n
@@ -122,7 +125,7 @@ def reload_tor_service():
                 text=True
             )
             # Read only errors in background
-            def _log_tor_errors(stream):
+            def _log_tor_errors(stream) -> None:
                 for line in stream:
                     if line.strip():
                         log_error(f"tor error: {line.strip()}")
@@ -133,7 +136,7 @@ def reload_tor_service():
             subprocess.run(["brew", "services", "restart", "tor"], stdout=subprocess.DEVNULL, check=True)
         else:
             subprocess.run(["sudo", "service", "tor", "reload"], stdout=subprocess.DEVNULL, check=True)
-def stop_tor_service():
+def stop_tor_service() -> None:
     """
     #### Stops the Tor service using OS-specific commands\n
     - **Linux**: Uses `systemctl stop` or `service stop`\n
@@ -152,7 +155,7 @@ def stop_tor_service():
         subprocess.run(["sudo", "service", "tor", "stop"], stdout=subprocess.DEVNULL, check=True)
 
 # Initialization
-def initialize_environment():
+def initialize_environment() -> None:
     """
     #### Sets up the runtime environment for TorNet\n
     - Installs required dependencies (`pip`, `requests`, `tor`) based on the current OS.\n
@@ -178,7 +181,7 @@ def initialize_environment():
 
     print_start_message()
     print_ip(ma_ip())
-def print_start_message():
+def print_start_message() -> None:
     """
     #### Displays startup guidance for the user\n
     Reminds the user to configure their browser for anonymity.
@@ -186,7 +189,7 @@ def print_start_message():
     log_notice("Make sure to configure your browser to use Tor for anonymity.")
 
 # IP address handling
-def ma_ip():
+def ma_ip() -> str | None:
     """
     #### Returns current IP\n
     If `is_tor_running()`, calls `ma_ip_tor()`\n
@@ -205,7 +208,7 @@ def ma_ip():
         return ip2 or ip1
     else:
         return ma_ip_normal()
-def is_tor_running():
+def is_tor_running() -> bool:
     """
     #### Checks if the Tor process is currently running
     - On **Linux/macOS**: uses `pgrep -x tor`
@@ -223,7 +226,7 @@ def is_tor_running():
             return True
     except subprocess.CalledProcessError:
         return False
-def ma_ip_tor():
+def ma_ip_tor() -> str | None:
     """
     #### Returns current Tor IP using SOCKS5 proxy at `{TOR_SOCKS_HOST}:{TOR_SOCKS_PORT}`\n
     Uses the official Tor Project API to verify exit node and IP.\n
@@ -252,7 +255,7 @@ def ma_ip_tor():
     except requests.RequestException as e:
         log_error(f"Failed to fetch Tor IP from {service}: {e}")
         return None
-def ma_ip_normal():
+def ma_ip_normal() -> str | None:
     """
     #### Returns the current public IP address without using Tor\n
     Makes a direct request to `https://api.ipify.org` and returns the response.\n
@@ -269,7 +272,7 @@ def ma_ip_normal():
         return None
 
 # IP Rotation Functions
-def change_ip():
+def change_ip() -> str | None:
     """
     #### Forces a new Tor identity and fetches a new IP address\n
     Calls `reload_tor_service()` and then retrieves the new IP via `ma_ip()`.\n
@@ -282,13 +285,13 @@ def change_ip():
     reload_tor_service()
 
     return ma_ip()
-def change_ip_repeatedly(interval: str, count: int):
+def change_ip_repeatedly(interval: str, count: int) -> None:
     """
     #### Changes IP repeatedly at a given interval
     - `interval` (str): Can be a single number `"60"` or a range `"60-120"` seconds.
     - `count` (int): Number of times to change IP. If `0`, loop indefinitely.
     """
-    def parse_interval(interval_str):
+    def parse_interval(interval_str) -> int:
         interval_str = str(interval_str)
         if "-" in interval_str:
             parts = interval_str.split("-")
@@ -296,7 +299,7 @@ def change_ip_repeatedly(interval: str, count: int):
         else:
             return int(interval_str)
 
-    def sleep_and_rotate(remaining=None):
+    def sleep_and_rotate(remaining: int | None = None) -> None:
         sleep_time = parse_interval(interval)
         if remaining is not None:
             log_minor(f"Remaining IP changes: {remaining}")
@@ -326,7 +329,7 @@ def change_ip_repeatedly(interval: str, count: int):
         # fallback for systems where signal.pause is not available
         while True:
                 time.sleep(1)
-def print_ip(ip):
+def print_ip(ip) -> None:
     """
     #### Prints the given IP in a formatted message\n
     - **ip** (str): The IP address to print
@@ -344,7 +347,7 @@ def print_ip(ip):
     log_change(border)
 
 # Utility commands
-def auto_fix():
+def auto_fix() -> None:
     """
     #### Automatically reinstalls all dependencies and upgrades the tornet package\n
     Equivalent to re-running the environment setup and refreshing the installed version.
@@ -353,7 +356,7 @@ def auto_fix():
     install_requests()
     install_tor()
     subprocess.run([sys.executable, "-m", "pip", "install", "--upgrade", "tornet-mp"], stdout=subprocess.DEVNULL, check=True)
-def stop_services():
+def stop_services() -> None:
     """
     #### Stops the Tor service and any active tornet processes\n
     Ensures this runs only once per session.
@@ -378,7 +381,7 @@ def stop_services():
         subprocess.run(["pkill", "-f", TOOL_NAME], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
     log_success(f"Tor services and {TOOL_NAME} processes stopped.")
-def signal_handler(sig, frame):
+def signal_handler(sig, frame) -> None:
     """
     #### Gracefully handles termination signals\n
     Stops services and exits cleanly when user interrupts with `Ctrl+C` or `SIGQUIT/SIGBREAK`.
@@ -387,7 +390,7 @@ def signal_handler(sig, frame):
     print("\n", end="") # Manual newline for clarity
     log_error("Program terminated by user.")
     exit(0)
-def check_internet_connection():
+def check_internet_connection() -> bool:
     """
     #### Continuously checks if the internet connection is active\n
     ##### Tries to connect to Google every second. Prints a warning if offline.\n
@@ -402,10 +405,10 @@ def check_internet_connection():
         except requests.RequestException:
             log_error("Internet connection lost. Please check your internet connection.")
             return False
-def wait_for_tor(timeout=60):
+def wait_for_tor(timeout=60) -> bool:
     """
     #### Waits until the Tor SOCKS proxy is responsive or times out\n
-    Attempts multiple connections via SOCKS5 until one succeeds or time runs out.
+    ##### Attempts multiple connections via SOCKS5 until one succeeds or time runs out.\n
     ***
     Returns:
         bool: True if Tor responded, False if timeout occurred.
@@ -432,9 +435,8 @@ def wait_for_tor(timeout=60):
     return False
 
 
-
 # CLI entry point
-def main():
+def main() -> None:
     signal.signal(signal.SIGINT, signal_handler)
     # Use SIGBREAK for Windows, SIGQUIT for Unix-like systems.
     if is_windows():

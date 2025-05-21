@@ -8,7 +8,7 @@ white = "\033[97m"
 reset = "\033[0m"
 cyan = "\033[36m"
 
-def print_banner():
+def print_banner() -> str:
     version_str = f"Version {__version__}"
     
     # Dynamic version formatting
