@@ -131,7 +131,7 @@ pre-commit install
 This project began life as [tornet](https://github.com/ByteBreach/tornet) by Mr Fidal.  
 It was later reimagined and extended independently by [Ayad Seghairi](https://github.com/ayadseghairi/tornet).
 
-**TorNet‑MP** builds on both prior versions, refactoring the codebase, adding cross‑platform support (Windows, macOS, Linux), modern packaging, richer logging, automatic dependency management, and a polished CLI/UI.
+**TorNet-MP** builds on both prior versions, refactoring the codebase, adding cross-platform support (Windows, macOS, Linux), modern packaging, richer logging, automatic dependency management, and a polished CLI/UI.
 
 ## License
 

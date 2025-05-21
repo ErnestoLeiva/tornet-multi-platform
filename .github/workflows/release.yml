@@ -48,14 +48,23 @@ jobs:
           python -m pip install --upgrade build
           rm -rf dist build *.egg-info
           python -m build
-
+      
+      - name: Get commit message for version bump
+        id: commit
+        run: |
+          MESSAGE=$(git log -n 1 --pretty=format:"%s" -- src/tornet_mp/version.py)
+          echo "message=$MESSAGE" >> $GITHUB_OUTPUT
+      
       - name: Create GitHub Release with asset
         uses: softprops/action-gh-release@v1
         with:
           tag_name: v${{ steps.version.outputs.version }}
           name: Release v${{ steps.version.outputs.version }}
           body: |
-            Automated release for version v${{ steps.version.outputs.version }}
+            **Commit message:**  
+            `${{ steps.commit.outputs.message }}`
+            
+            **Full Changelog**: https://github.com/ErnestoLeiva/tornet-multi-platform/commits/v${{ steps.version.outputs.version }}
           files: dist/*
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
