@@ -1,16 +1,17 @@
 from .__main__ import main
-from .version import __version__
 from .core import (
-    ma_ip,
+    auto_fix,
     change_ip,
-    initialize_environment,
     change_ip_repeatedly,
+    initialize_environment,
+    is_tor_running,
+    ma_ip,
+    print_ip,
     signal_handler,
     stop_services,
-    is_tor_running,
-    print_ip,
-    auto_fix,
 )
+from .version import __version__
+
 __all__ = [
     "main",
     "__version__",

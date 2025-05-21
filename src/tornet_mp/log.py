@@ -12,6 +12,7 @@ Use::
     log.log_info("Hello!")
 
 """
+
 from __future__ import annotations
 
 import logging
@@ -20,15 +21,15 @@ import sys
 _logger = logging.getLogger("tornet_mp")
 
 # ANSI colours (will be stripped by logging handlers that don't support them)
-white   = "\033[97m"
-green   = "\033[92m"
-red     = "\033[91m"
-yellow  = "\033[93m"
-blue    = "\033[94m"
+white = "\033[97m"
+green = "\033[92m"
+red = "\033[91m"
+yellow = "\033[93m"
+blue = "\033[94m"
 magenta = "\033[95m"
-cyan    = "\033[36m"
-gray    = "\033[90m"
-reset   = "\033[0m"
+cyan = "\033[36m"
+gray = "\033[90m"
+reset = "\033[0m"
 
 
 def configure(level: int = logging.DEBUG) -> None:
@@ -40,14 +41,35 @@ def configure(level: int = logging.DEBUG) -> None:
     _logger.setLevel(level)
 
 
-def log(message: str, tag: str = "+", color: str = white, level: int = logging.INFO) -> None:
+def log(
+    message: str, tag: str = "+", color: str = white, level: int = logging.INFO
+) -> None:
     _logger.log(level, f"[{color}{tag}{reset}] {color}{message}{reset}")
 
 
-def log_success(msg: str)  -> None: log(msg, tag="+", color=green, level=logging.INFO)
-def log_info(msg: str)     -> None: log(msg, tag="~", color=blue, level=logging.INFO)
-def log_notice(msg: str)   -> None: log(msg, tag="*", color=cyan, level=logging.INFO)
-def log_minor(msg: str)    -> None: log(msg, tag="~", color=gray, level=logging.DEBUG)
-def log_warn(msg: str)     -> None: log(msg, tag="!", color=yellow, level=logging.WARNING)
-def log_error(msg: str)    -> None: log(msg, tag="!", color=red, level=logging.ERROR)
-def log_change(msg: str)   -> None: log(msg, tag="+", color=magenta, level=logging.INFO)
+def log_success(msg: str) -> None:
+    log(msg, tag="+", color=green, level=logging.INFO)
+
+
+def log_info(msg: str) -> None:
+    log(msg, tag="~", color=blue, level=logging.INFO)
+
+
+def log_notice(msg: str) -> None:
+    log(msg, tag="*", color=cyan, level=logging.INFO)
+
+
+def log_minor(msg: str) -> None:
+    log(msg, tag="~", color=gray, level=logging.DEBUG)
+
+
+def log_warn(msg: str) -> None:
+    log(msg, tag="!", color=yellow, level=logging.WARNING)
+
+
+def log_error(msg: str) -> None:
+    log(msg, tag="!", color=red, level=logging.ERROR)
+
+
+def log_change(msg: str) -> None:
+    log(msg, tag="+", color=magenta, level=logging.INFO)

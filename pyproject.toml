@@ -36,3 +36,7 @@ packages = ["tornet_mp"]
 
 [tool.setuptools.dynamic]
 version = { attr = "tornet_mp.version.__version__" }
+
+[tool.isort]
+profile = "black"
+line_length = 88 # keep in sync with Black
