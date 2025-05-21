@@ -1,0 +1,19 @@
+services:
+  tornet-mp:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: tornet-mp
+    ports:
+      - "9050:9050"
+    restart: unless-stopped
+    volumes:
+      - tor-data:/var/lib/tor
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+volumes:
+  tor-data:
