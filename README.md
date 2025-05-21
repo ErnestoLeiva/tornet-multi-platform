@@ -56,6 +56,14 @@ tornet-mp --interval 90 --count 5
 tornet-mp --interval "60-120" --count 0
 ```
 
+## Example output
+
+<img src="https://i.imgur.com/hCV5acd.png" alt="TorNet-MP CLI in action">
+
+```bash
+tornet-mp --interval 15 --count 1
+```
+
 ## CLI options
 
 | Flag                 | Description                                      | Default |
