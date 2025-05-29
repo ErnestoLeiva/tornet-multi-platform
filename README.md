@@ -118,7 +118,7 @@ You can manually confirm your browser is routing traffic through the Tor network
 
 1. Open your browser (configured to use the Tor proxy).
 2. Visit [https://check.torproject.org/api/ip](https://check.torproject.org/api/ip).
-3. If the JSON output includes `"isTor" : true`, your browser is using a valid Tor exit node.
+3. If the JSON output includes `"IsTor" : true`, your browser is using a valid Tor exit node.
 
 #### ⚠️ **Note:** Occasionally, you may see mismatched IPs due to stale circuits. This API always shows the most current and accurate exit node IP.
 
