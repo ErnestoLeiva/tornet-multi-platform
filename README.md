@@ -1,7 +1,21 @@
 <img src = "https://i.imgur.com/Mo2HtCS.png" alt="Tor logo">**NET-MP**
 
-[![PyPI version](https://img.shields.io/pypi/v/tornet-mp)](https://pypi.org/project/tornet-mp)
-[![Python](https://img.shields.io/pypi/pyversions/tornet-mp)](https://pypi.org/project/tornet-mp)
+[![PyPI version](https://img.shields.io/pypi/v/tornet-mp?logo=pypi&logoColor=%233775A9&label=PyPi)](https://pypi.org/project/tornet-mp)
+[![Python](https://img.shields.io/pypi/pyversions/tornet-mp?logo=python&logoColor=%233776AB)](https://pypi.org/project/tornet-mp)
+[![License](https://img.shields.io/badge/⚖️_license-MIT-yellow.svg)](https://github.com/ErnestoLeiva/tornet-multi-platform?tab=License-1-ov-file)
+
+[![Last Commit](https://img.shields.io/github/last-commit/ErnestoLeiva/tornet-multi-platform)](https://github.com/ErnestoLeiva/tornet-multi-platform/commits/main/)
+![Repo Size](https://img.shields.io/github/repo-size/ErnestoLeiva/tornet-multi-platform)
+![GitHub Issues](https://img.shields.io/github/issues/ErnestoLeiva/tornet-multi-platform)
+
+![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit)
+![Code Style](https://img.shields.io/badge/code%20style-black-000000.svg)
+![mypy](https://img.shields.io/badge/type--checked-mypy-informational)
+
+![Build](https://github.com/ErnestoLeiva/tornet-multi-platform/actions/workflows/publish.yml/badge.svg)
+![Build](https://github.com/ErnestoLeiva/tornet-multi-platform/actions/workflows/release.yml/badge.svg)
+
+![GitHub Stars](https://img.shields.io/github/stars/ErnestoLeiva/tornet-multi-platform?style=social)
 
 ---
 
@@ -90,13 +104,25 @@ tornet-mp --interval 15 --count 1
 
 ### **Firefox**
 
-* Go to `Preferences` > `General` > `Network Settings`.
-* Select `Manual proxy configuration`.
-* Enter `127.0.0.1` for `SOCKS Host` and `9050` for the `Port` (or your specified values if different).
-* Ensure the checkbox `Proxy DNS when using SOCKS v5` is checked.
-* Click `OK`.
+1. Go to `Preferences` > `General` > `Network Settings`.
+2. Select `Manual proxy configuration`.
+3. Enter `127.0.0.1` for `SOCKS Host` and `9050` for the `Port` (or your specified values if different).
+4. Ensure the checkbox `Proxy DNS when using SOCKS v5` is checked.
+5. Click `OK`.
 
 <img src="https://i.imgur.com/jDLV6BZ.png" alt="Firefox Configuration Example">
+
+### **Verifying Tor IP Validity**
+
+You can manually confirm your browser is routing traffic through the Tor network:
+
+1. Open your browser (configured to use the Tor proxy).
+2. Visit [https://check.torproject.org/api/ip](https://check.torproject.org/api/ip).
+3. If the JSON output includes `"isTor" : true`, your browser is using a valid Tor exit node.
+
+#### ⚠️ **Note:** Occasionally, you may see mismatched IPs due to stale circuits. This API always shows the most current and accurate exit node IP.
+
+<img src="https://i.imgur.com/IREOywH.png" alt="Tor Node Verify">
 
 ## Python use
 
