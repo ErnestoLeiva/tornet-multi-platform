@@ -104,11 +104,11 @@ tornet-mp --interval 15 --count 1
 
 ### **Firefox**
 
-1. Go to `Preferences` > `General` > `Network Settings`.
-2. Select `Manual proxy configuration`.
-3. Enter `127.0.0.1` for `SOCKS Host` and `9050` for the `Port` (or your specified values if different).
-4. Ensure the checkbox `Proxy DNS when using SOCKS v5` is checked.
-5. Click `OK`.
+1. Go to `Preferences` > `General` > `Network Settings`
+2. Select `Manual proxy configuration`
+3. Enter `127.0.0.1` for `SOCKS Host` and `9050` for the `Port` (or your specified values if different)
+4. Ensure the checkbox `Proxy DNS when using SOCKS v5` is checked
+5. Click `OK`
 
 <img src="https://i.imgur.com/jDLV6BZ.png" alt="Firefox Configuration Example">
 
@@ -116,9 +116,9 @@ tornet-mp --interval 15 --count 1
 
 You can manually confirm your browser is routing traffic through the Tor network:
 
-1. Open your browser (configured to use the Tor proxy).
-2. Visit [https://check.torproject.org/api/ip](https://check.torproject.org/api/ip).
-3. If the JSON output includes `"IsTor" : true`, your browser is using a valid Tor exit node.
+1. Open your browser (configured to use the Tor proxy)
+2. Visit [https://check.torproject.org/api/ip](https://check.torproject.org/api/ip)
+3. If the JSON output includes `"IsTor" : true`, your browser is using a valid Tor exit node
 
 #### ⚠️ **Note:** Occasionally, you may see mismatched IPs due to stale circuits. This API always shows the most current and accurate exit node IP.
 
@@ -152,7 +152,7 @@ If Tor is already installed and running you can skip `initialize_environment()` 
 ## Contributing
 
 Bug reports and PRs are welcome!
-Style is enforced with [pre-commit](https://pre-commit.com).  
+Style is enforced with [pre-commit](https://pre-commit.com).
 After cloning, run:
 
 ```bash
