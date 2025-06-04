@@ -537,7 +537,7 @@ def main() -> None:
 
     # Argument parsing
     parser = argparse.ArgumentParser(
-        description="TorNet - Automate IP address changes using Tor"
+        description="TorNet - Automate IP address changes using Tor (https://github.com/ErnestoLeiva/tornet-multi-platform)"
     )
     parser.add_argument(
         "--interval", type=str, default=60, help="Time in seconds between IP changes"
