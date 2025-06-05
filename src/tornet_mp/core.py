@@ -1,6 +1,4 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-#
 # tornet - Automate IP address changes using Tor
 # Author: Ernesto Leiva
 # Copyright (c) 2025 Ernesto Leiva All rights reserved.
@@ -390,6 +388,7 @@ def change_ip_repeatedly(interval: str, count: int) -> None:
     log_notice(
         "Press CTRL+C to safely stop the Tor service and clean up tornet-mp processes."
     )
+    print("\n", end="")  # Manual newline for clarity
 
     if hasattr(signal, "pause"):
         signal.pause()

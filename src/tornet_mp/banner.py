@@ -1,5 +1,3 @@
-#!/usr/bin/python
-
 from .version import __version__
 
 green = "\033[92m"

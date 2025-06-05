@@ -21,7 +21,8 @@
 
 Automate public-IP rotation through the Tor network on **Windows, macOS and Linux**.
 
-* 🛡️  Hide your real IP behind Tor exit nodes  
+* 🛡️  Hide your real IP behind Tor exit nodes
+* 🧅  Connect to `.onion` addresses on non-Tor browsers (e.g., Firefox)
 * 🔄  Rotate on a timer or on demand  
 * ⚙️  Self-installs missing prerequisites (`pip`, `requests[socks]`, `Tor`)  
 * 📜  Clear, color-coded logs (all levels shown by default)  
@@ -72,7 +73,7 @@ tornet-mp --interval "60-120" --count 0
 
 ## Example output
 
-<img src="https://i.imgur.com/hCV5acd.png" alt="TorNet-MP CLI in action">
+<img src="https://i.imgur.com/zxPQogB.png" alt="TorNet-MP CLI in action">
 
 ```bash
 tornet-mp --interval 15 --count 1
@@ -110,7 +111,7 @@ tornet-mp --interval 15 --count 1
 4. Ensure the checkbox `Proxy DNS when using SOCKS v5` is checked
 5. Click `OK`
 
-<img src="https://i.imgur.com/jDLV6BZ.png" alt="Firefox Configuration Example">
+<img src="https://i.imgur.com/lQLu0GR.png" alt="Firefox Configuration Example">
 
 ### **Verifying Tor IP Validity**
 
@@ -120,9 +121,21 @@ You can manually confirm your browser is routing traffic through the Tor network
 2. Visit [https://check.torproject.org/api/ip](https://check.torproject.org/api/ip)
 3. If the JSON output includes `"IsTor" : true`, your browser is using a valid Tor exit node
 
-#### ⚠️ **Note:** Occasionally, you may see mismatched IPs due to stale circuits. This API always shows the most current and accurate exit node IP.
+#### ⚠️ **Note:** Occasionally, you may see mismatched IPs due to stale circuits; This API always shows the most current and accurate exit node IP
 
-<img src="https://i.imgur.com/IREOywH.png" alt="Tor Node Verify">
+<img src="https://i.imgur.com/O4e63tN.png" alt="Tor Node Verify">
+
+### **Bonus: Access .onion Sites from Firefox**
+
+Once your browser is configured to use TorNet’s proxy, you can access `.onion` websites directly from Firefox.
+
+Below is a screenshot of DuckDuckGo's onion site loaded in a regular Firefox browser using TorNet as the SOCKS5 proxy:
+
+<img src="https://i.imgur.com/BLhLb7M.png" alt="DuckDuckGo Onion Site">
+
+```text
+https://duckduckgogg42xjoc72x3sjasowoarfbgcmvfimaftt6twagswzczad.onion
+```
 
 ## Python use
 
