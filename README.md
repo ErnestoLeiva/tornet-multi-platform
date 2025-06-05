@@ -73,7 +73,7 @@ tornet-mp --interval "60-120" --count 0
 
 ## Example output
 
-<img src="https://i.imgur.com/zxPQogB.png" alt="TorNet-MP CLI in action">
+<img src="https://i.imgur.com/zxPQogB.png" alt="TorNet-MP CLI in action" width="500">
 
 ```bash
 tornet-mp --interval 15 --count 1
@@ -111,7 +111,7 @@ tornet-mp --interval 15 --count 1
 4. Ensure the checkbox `Proxy DNS when using SOCKS v5` is checked
 5. Click `OK`
 
-<img src="https://i.imgur.com/lQLu0GR.png" alt="Firefox Configuration Example">
+<img src="https://i.imgur.com/lQLu0GR.png" alt="Firefox Configuration Example" width="500">
 
 ### **Verifying Tor IP Validity**
 
@@ -123,7 +123,7 @@ You can manually confirm your browser is routing traffic through the Tor network
 
 #### ⚠️ **Note:** Occasionally, you may see mismatched IPs due to stale circuits; This API always shows the most current and accurate exit node IP
 
-<img src="https://i.imgur.com/O4e63tN.png" alt="Tor Node Verify">
+<img src="https://i.imgur.com/O4e63tN.png" alt="Tor Node Verify" width="500">
 
 ### **Bonus: Access .onion Sites from Firefox**
 
@@ -131,7 +131,7 @@ Once your browser is configured to use TorNet’s proxy, you can access `.onion`
 
 Below is a screenshot of DuckDuckGo's onion site loaded in a regular Firefox browser using TorNet as the SOCKS5 proxy:
 
-<img src="https://i.imgur.com/BLhLb7M.png" alt="DuckDuckGo Onion Site">
+<img src="https://i.imgur.com/BLhLb7M.png" alt="DuckDuckGo Onion Site" width="600">
 
 ```text
 https://duckduckgogg42xjoc72x3sjasowoarfbgcmvfimaftt6twagswzczad.onion

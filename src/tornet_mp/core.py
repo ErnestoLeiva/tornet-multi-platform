@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# tornet - Automate IP address changes using Tor
+# tornet-mp - Automate IP address changes using Tor
 # Author: Ernesto Leiva
 # Copyright (c) 2025 Ernesto Leiva All rights reserved.
 import argparse
