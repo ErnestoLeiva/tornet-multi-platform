@@ -539,10 +539,15 @@ def main() -> None:
         description="TorNet - Automate IP address changes using Tor (https://github.com/ErnestoLeiva/tornet-multi-platform)"
     )
     parser.add_argument(
-        "--interval", type=str, default=60, help="Time in seconds between IP changes"
+        "--interval",
+        metavar="<seconds>",
+        type=str,
+        default=60,
+        help="Time in seconds between IP changes",
     )
     parser.add_argument(
         "--count",
+        metavar="<count>",
         type=int,
         default=10,
         help="Number of times to change the IP. If 0, change IP indefinitely",
