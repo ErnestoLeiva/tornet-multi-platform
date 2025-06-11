@@ -20,13 +20,13 @@ docker-compose ps
 
 ## Using the Tornet Proxy
 
-The Tor SOCKS proxy is now available at `127.0.0.1:4000`. You can configure your browser or applications to use this proxy:
+The Tor SOCKS proxy is now available at `127.0.0.1:9050`. You can configure your browser or applications to use this proxy:
 
 ### Firefox Configuration
 
 1. Go to `Preferences` > `General` > `Network Settings`
 2. Select `Manual proxy configuration`
-3. Enter `127.0.0.1` for `SOCKS Host` and `4000` for the `Port`
+3. Enter `127.0.0.1` for `SOCKS Host` and `9050` for the `Port`
 4. Check the box `Proxy DNS when using SOCKS v5`
 5. Click `OK`
 
@@ -35,7 +35,7 @@ The Tor SOCKS proxy is now available at `127.0.0.1:4000`. You can configure your
 Configure your application to use a SOCKS5 proxy with:
 
 - Host: 127.0.0.1
-- Port: 4000
+- Port: 9050
 
 ## Viewing Logs
 

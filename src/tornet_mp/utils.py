@@ -1,3 +1,4 @@
+import importlib
 import os
 import platform
 import subprocess
@@ -76,7 +77,8 @@ def install_requests() -> None:
     #### Installs the `requests` and `requests[socks]` Python packages if not already installed.\n
     """
     try:
-
+        importlib.import_module("requests")
+        importlib.import_module("socks")
         log_minor("requests is already installed.")
     except ImportError:
         log_minor("requests not found, installing...")
